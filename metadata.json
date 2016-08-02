@@ -2,7 +2,7 @@
   "name": "echoes-komea_security",
   "version": "4.1",
   "author": "Echoes Technologies",
-  "summary": "Puppet module to manage Komea Security installation and configuration",
+  "summary": "Puppet module to manage Komea Dashboard Liferay's installation and configuration",
   "license": "Apache-2.0",
   "source": "",
   "project_page": "",
