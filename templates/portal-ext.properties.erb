@@ -1,0 +1,33 @@
+#----------KOMEA------------------#
+komea.charts.url=<%= @dashboard_charts_url %>
+komea.organization.url=<%= @dashboard_organization_url %>
+export.images.url=<%= @dashboard_exporter_url %>
+komea.login=<%= @komea_user %>
+komea.password=<%= @komea_password %>
+#---------------------------------#
+
+#----------DATABASE---------------#
+jdbc.default.driverClassName=<%= @jdbc_driver %>
+jdbc.default.url=<%= @jdbc_url %>
+jdbc.default.username=<%= @jdbc_user %>
+jdbc.default.password=<%= @jdbc_password %>
+#---------------------------------#
+
+#----------OTHERS-----------------#
+web.server.http.port=<%= @web_server_http_port %>
+#web.server.https.port=443
+web.server.protocol=<%= @web_server_protocol %>
+web.server.host=<%= @web_server_host %>
+#redirect.security.mode=domain
+#redirect.url.domains.allowed=dashboard.metrixware.local
+layout.user.private.layouts.enabled=true
+admin.email.user.added.enabled=false
+auth.forward.by.last.path=true
+auth.forward.by.redirect=true
+company.security.auth.type=emailAddress
+layout.show.portlet.access.denied=false
+ldap.import.user.password.enabled=false
+locale.default.request=true
+session.store.password=true
+terms.of.use.required=false
+#---------------------------------#

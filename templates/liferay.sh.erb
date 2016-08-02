@@ -1,0 +1,41 @@
+#!/bin/bash
+
+LIFERAY_LOCATION="<%= @liferay_location %>"
+
+start() {
+  $LIFERAY_LOCATION/tomcat/bin/startup.sh
+}
+
+stop() {
+  $LIFERAY_LOCATION/tomcat/bin/shutdown.sh
+}
+
+status() {
+  if [ -e $LIFERAY_LOCATION/tomcat/catalina_pid.txt ]; then
+    liferayPID=`cat catalina_pid.txt`
+    echo "Liferay (pid $liferayPID) is running..."
+  else
+    echo "Liferay is NOT running"
+  fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+exit 0

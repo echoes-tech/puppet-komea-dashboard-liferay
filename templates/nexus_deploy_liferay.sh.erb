@@ -1,0 +1,52 @@
+#!/bin/bash
+
+KOMEA_LOCATION="<%= @base_location %>"
+NEXUS_URL="<%= @nexus_url %>"
+NEXUS_LOGIN=$1
+NEXUS_PASSWORD=$2
+NEXUS_REPOSITORY="<%= @nexus_repository %>"
+NEXUS_THIRD_PARTIES_REPO="<%= @nexus_third_parties_repository %>"
+VERSION="<%= @version %>"
+LIFERAY_VERSION="<%= @liferay_version %>"
+
+LIFERAY_GROUP_ID="org/komea/"
+KOMEA_GROUP_ID="org/komea/dashboard"
+
+retrieveFromNexus() {
+  OUTPUT=$1
+  REPO=$2
+  GROUP_ID=$3
+  ARTIFACT=$4
+  ARTIFACT_VERSION=$5
+  EXTENSION=$6
+
+  curl -X GET -u $NEXUS_LOGIN:$NEXUS_PASSWORD -o "$OUTPUT.md5" "$NEXUS_URL/content/repositories/$REPO/$GROUP_ID/$ARTIFACT/$ARTIFACT_VERSION/$ARTIFACT-$ARTIFACT_VERSION.$EXTENSION.md5"
+  OUTPUT_MD5=`md5sum $OUTPUT | awk '{ print $1 }'`
+  REMOTE_MD5=`cat $OUTPUT.md5`
+
+  if [ "$OUTPUT_MD5" =  "$REMOTE_MD5" ]
+  then
+    echo "$OUTPUT is already the latest version!"
+  else
+    echo "$OUTPUT_MD5 != $REMOTE_MD5"
+    curl -X GET -u $NEXUS_LOGIN:$NEXUS_PASSWORD -o $OUTPUT  "$NEXUS_URL/content/repositories/$REPO/$GROUP_ID/$ARTIFACT/$ARTIFACT_VERSION/$ARTIFACT-$ARTIFACT_VERSION.$EXTENSION"
+  fi
+}
+
+# Deploy Liferay
+LIFERAY_ZIP="$KOMEA_LOCATION/komea-liferay.zip"
+BEFORE_MD5=`md5sum $LIFERAY_ZIP | awk '{ print $1 }'`
+retrieveFromNexus $LIFERAY_ZIP $NEXUS_THIRD_PARTIES_REPO $LIFERAY_GROUP_ID "komea-liferay" $LIFERAY_VERSION "zip"
+AFTER_MD5=`md5sum $ACTIVEMQ_ZIP | awk '{ print $1 }'`
+if [ "$BEFORE_MD5" =  "$AFTER_MD5" ]
+then
+  echo "$LIFERAY_ZIP has not changed."
+else
+  unzip -o $LIFERAY_ZIP -d $KOMEA_LOCATION
+fi
+
+# Deploy portlets
+retrieveFromNexus "$KOMEA_LOCATION/komea-liferay/tomcat/deploy/dashboard-portlets.war" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-portlets" $VERSION "war"
+
+# Deploy dashboard-exporter webapp
+retrieveFromNexus "$KOMEA_LOCATION/dashboard-exporter/dashboard-exporter.jar" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-exporter" $VERSION "jar"
