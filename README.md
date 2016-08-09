@@ -33,7 +33,7 @@ Supports Puppet v3 (optionally with future parser) and v4 with Ruby versions 1.8
 ### Beginning with Komea Dashboard Liferay
 
 ```puppet
-include ::komea_dashboard_core
+include ::komea_dashboard_liferay
 ```
 
 ## Reference
