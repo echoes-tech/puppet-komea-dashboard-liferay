@@ -42,18 +42,18 @@ include ::komea_dashboard_liferay
 
 #### Public classes
 
-* komea_dashboard_core: Main class, includes all other classes.
+* komea_dashboard_liferay: Main class, includes all other classes.
 
 #### Private classes
 
-* komea_dashboard_core::params: Sets parameter defaults per operating system.
-* komea_dashboard_core::install: Handles the packages.
-* komea_dashboard_core::config: Handles the configuration file.
-* komea_dashboard_core::service: Handles the services.
+* komea_dashboard_liferay::params: Sets parameter defaults per operating system.
+* komea_dashboard_liferay::install: Handles the packages.
+* komea_dashboard_liferay::config: Handles the configuration file.
+* komea_dashboard_liferay::service: Handles the services.
 
 #### Parameters
 
-The following parameters are available in the `::komea_dashboard_core` class:
+The following parameters are available in the `::komea_dashboard_liferay` class:
 
 ##### `version`
 
@@ -121,7 +121,7 @@ Specifies the url of the Nexus server that will be used to retrieve Komea Dashbo
 
 ##### `nexus_repository`
 
-Specifies the name of the Nexus repository that contains Komea Dashboard Core's artifacts. Valid options: string. Default value: 'komea'.
+Specifies the name of the Nexus repository that contains Komea Dashboard's artifacts. Valid options: string. Default value: 'komea'.
 
 ##### `nexus_third_parties_repository`
 
