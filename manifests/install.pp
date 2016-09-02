@@ -71,7 +71,7 @@ class komea_dashboard_liferay::install (
   exec { "liferay-db-import":
     unless => "mysql --user=$jdbc_user --password=$jdbc_password -e 'use $liferay_dbname'",
     path => ["/bin", "/usr/bin"],
-    command => "mysql --user=$jdbc_user --password=$jdbc_password $liferay_dbname < $liferay_sqldump",
+    command => "mysql --user=$jdbc_user --password=$jdbc_password < $liferay_sqldump",
     require => Service["mysqld"],
   }
 
