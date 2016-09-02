@@ -37,7 +37,7 @@ retrieveFromNexus() {
 LIFERAY_ZIP="$KOMEA_LOCATION/komea-liferay.zip"
 BEFORE_MD5=`md5sum $LIFERAY_ZIP | awk '{ print $1 }'`
 retrieveFromNexus $LIFERAY_ZIP $NEXUS_THIRD_PARTIES_REPO $LIFERAY_GROUP_ID "komea-liferay" $LIFERAY_VERSION "zip"
-AFTER_MD5=`md5sum $ACTIVEMQ_ZIP | awk '{ print $1 }'`
+AFTER_MD5=`md5sum $LIFERAY_ZIP | awk '{ print $1 }'`
 if [ "$BEFORE_MD5" =  "$AFTER_MD5" ]
 then
   echo "$LIFERAY_ZIP has not changed."
