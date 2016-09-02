@@ -9,7 +9,9 @@ class komea_dashboard_liferay::install (
   $nexus_password         = $::komea_dashboard_liferay::nexus_password,
   $base_location          = $::komea_dashboard_liferay::base_location,
   $max_heap_size          = $::komea_dashboard_liferay::max_heap_size,
-  $initial_heap_size      = $::komea_dashboard_liferay::initial_heap_size
+  $initial_heap_size      = $::komea_dashboard_liferay::initial_heap_size,
+  $jdbc_user              = $::komea_dashboard_liferay::jdbc_user,
+  $jdbc_password          = $::komea_dashboard_liferay::jdbc_password
 )inherits komea_dashboard_liferay {
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
@@ -53,6 +55,24 @@ class komea_dashboard_liferay::install (
     group    => "root",
     mode     => "0755",
     content  => template("${module_name}/liferay.sh.erb")
+  }
+
+  $liferay_sqldump = "$base_location/liferay.sql"
+  $liferay_dbname  = "liferay"
+
+  file { "$liferay_sqldump":
+    ensure  => "present",
+    owner   => "root",
+    group   => "root",
+    mode    => "0755",
+    content => template("${module_name}/liferay.sql.erb")
+  }
+
+  exec { "liferay-db-import":
+    unless => "mysql --user=$jdbc_user --password=$jdbc_password -e 'use $liferay_dbname'",
+    path => ["/bin", "/usr/bin"],
+    command => "mysql --user=$jdbc_user --password=$jdbc_password $liferay_dbname < $liferay_sqldump",
+    require => Service["mysqld"],
   }
 
   #------------ DEPLOY FROM NEXUS ------------#
