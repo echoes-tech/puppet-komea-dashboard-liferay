@@ -46,7 +46,7 @@ else
 fi
 
 # Deploy portlets
-retrieveFromNexus "$KOMEA_LOCATION/komea-liferay/tomcat/deploy/dashboard-portlets.war" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-portlets" $VERSION "war"
+retrieveFromNexus "$KOMEA_LOCATION/komea-liferay/deploy/dashboard-portlets.war" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-portlets" $VERSION "war"
 
 # Deploy dashboard-exporter webapp
 retrieveFromNexus "$KOMEA_LOCATION/dashboard-exporter/dashboard-exporter.jar" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-exporter" $VERSION "jar"
