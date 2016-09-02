@@ -12,7 +12,7 @@ stop() {
 
 status() {
   if [ -e $LIFERAY_LOCATION/tomcat/catalina_pid.txt ]; then
-    liferayPID=`cat catalina_pid.txt`
+    liferayPID=`cat $LIFERAY_LOCATION/tomcat/catalina_pid.txt`
     echo "Liferay (pid $liferayPID) is running..."
   else
     echo "Liferay is NOT running"
