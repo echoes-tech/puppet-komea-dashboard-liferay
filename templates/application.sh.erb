@@ -93,9 +93,11 @@ stop() {
 
 status() {
     getpid
-    if [ -n "$pid" ]
-        then echo "$APPLICATION_NAME (pid $pid) is running..."
-        else echo "$APPLICATION_NAME is NOT running"
+    if [ -n "$pid" ]; then
+      echo "$APPLICATION_NAME (pid $pid) is running..."
+    else
+      echo "$APPLICATION_NAME is NOT running"
+      exit 1
     fi
 }
 
