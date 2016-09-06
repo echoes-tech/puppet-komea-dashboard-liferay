@@ -33,7 +33,7 @@ class komea_dashboard_liferay::params {
   $logs_location          = "/var/log"
 
   $exporter_port          = 8082
-  $spring_boot_admin_url  = "http://localhost:8089"
+  $spring_boot_admin_url  = "http://localhost:8089/admin-server"
   $max_heap_size          = "64m"
   $initial_heap_size      = "32m"
 
