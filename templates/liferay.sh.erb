@@ -16,6 +16,7 @@ status() {
     echo "Liferay (pid $liferayPID) is running..."
   else
     echo "Liferay is NOT running"
+    exit 1
   fi
 }
 
