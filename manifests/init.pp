@@ -19,6 +19,8 @@ class komea_dashboard_liferay (
   $nexus_url              = $::komea_dashboard_liferay::params::nexus_url,
   $nexus_user             = $::komea_dashboard_liferay::params::nexus_user,
   $nexus_password         = $::komea_dashboard_liferay::params::nexus_password,
+  $nexus_liferay_group_id = $::komea_dashboard_liferay::params::nexus_liferay_group_id,
+  $nexus_komea_group_id   = $::komea_dashboard_liferay::params::nexus_komea_group_id,
   $base_location          = $::komea_dashboard_liferay::params::base_location,
   $logs_location          = $::komea_dashboard_liferay::params::logs_location,
   $exporter_port          = $::komea_dashboard_liferay::params::exporter_port,

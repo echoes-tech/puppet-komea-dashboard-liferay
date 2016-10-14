@@ -7,6 +7,8 @@ class komea_dashboard_liferay::install (
   $nexus_third_parties_repository = $::komea_dashboard_liferay::nexus_third_parties_repository,
   $nexus_user             = $::komea_dashboard_liferay::nexus_user,
   $nexus_password         = $::komea_dashboard_liferay::nexus_password,
+  $nexus_liferay_group_id = $::komea_dashboard_liferay::nexus_liferay_group_id,
+  $nexus_komea_group_id   = $::komea_dashboard_liferay::nexus_komea_group_id,
   $base_location          = $::komea_dashboard_liferay::base_location,
   $max_heap_size          = $::komea_dashboard_liferay::max_heap_size,
   $initial_heap_size      = $::komea_dashboard_liferay::initial_heap_size,

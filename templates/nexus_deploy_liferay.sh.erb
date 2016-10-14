@@ -9,8 +9,8 @@ NEXUS_THIRD_PARTIES_REPO="<%= @nexus_third_parties_repository %>"
 VERSION="<%= @version %>"
 LIFERAY_VERSION="<%= @liferay_version %>"
 
-LIFERAY_GROUP_ID="org/komea/"
-KOMEA_GROUP_ID="fr/echoes/labs/ksf/dashboard"
+LIFERAY_GROUP_ID="<%= @nexus_liferay_group_id %>"
+KOMEA_GROUP_ID="<%= @nexus_komea_group_id %>"
 
 retrieveFromNexus() {
   OUTPUT=$1
@@ -46,7 +46,16 @@ else
 fi
 
 # Deploy portlets
-retrieveFromNexus "$KOMEA_LOCATION/komea-liferay/deploy/dashboard-portlets.war" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-portlets" $VERSION "war"
+PORTLETS_WAR="$KOMEA_LOCATION/komea-liferay/dashboard-portlets.war"
+BEFORE_MD5=`md5sum $PORTLETS_WAR | awk '{ print $1 }'`
+retrieveFromNexus $PORTLETS_WAR $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-portlets" $VERSION "war"
+AFTER_MD5=`md5sum $PORTLETS_WAR | awk '{ print $1 }'`
+if [ "$BEFORE_MD5" =  "$AFTER_MD5" ]
+then
+  echo "$PORTLETS_WAR has not changed."
+else
+  cp $PORTLETS_WAR "$KOMEA_LOCATION/komea-liferay/deploy/dashboard-portlets.war"
+fi
 
 # Deploy dashboard-exporter webapp
 retrieveFromNexus "$KOMEA_LOCATION/dashboard-exporter/dashboard-exporter.jar" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-exporter" $VERSION "jar"
