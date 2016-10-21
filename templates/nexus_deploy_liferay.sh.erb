@@ -59,3 +59,16 @@ fi
 
 # Deploy dashboard-exporter webapp
 retrieveFromNexus "$KOMEA_LOCATION/dashboard-exporter/dashboard-exporter.jar" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-exporter" $VERSION "jar"
+
+# Deploy documentation
+DOC_ZIP="$KOMEA_LOCATION/documentation.zip"
+BEFORE_MD5=`md5sum $DOC_ZIP | awk '{ print $1 }'`
+retrieveFromNexus $DOC_ZIP $NEXUS_REPOSITORY $KOMEA_GROUP_ID "documentation" $VERSION "zip"
+AFTER_MD5=`md5sum $DOC_ZIP | awk '{ print $1 }'`
+if [ "$BEFORE_MD5" =  "$AFTER_MD5" ]
+then
+  echo "$DOC_ZIP has not changed."
+else
+  unzip -o $DOC_ZIP -d "$KOMEA_LOCATION/komea-liferay/tomcat/webapps/"
+  mv "$KOMEA_LOCATION/komea-liferay/tomcat/webapps/documentation-$VERSION" "$KOMEA_LOCATION/komea-liferay/tomcat/webapps/documentation"
+fi
