@@ -16,7 +16,8 @@ class komea_dashboard_liferay::config (
   $jdbc_password          = $::komea_dashboard_liferay::jdbc_password,
   $web_server_host        = $::komea_dashboard_liferay::web_server_host,
   $web_server_protocol    = $::komea_dashboard_liferay::web_server_protocol,
-  $web_server_http_port   = $::komea_dashboard_liferay::web_server_http_port
+  $web_server_http_port   = $::komea_dashboard_liferay::web_server_http_port,
+  $axis_hosts_allowed     = $::komea_dashboard_liferay::axis_hosts_allowed
 ) inherits komea_dashboard_liferay {
 
   if $caller_module_name != $module_name {

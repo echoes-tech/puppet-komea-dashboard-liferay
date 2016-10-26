@@ -22,6 +22,7 @@ class komea_dashboard_liferay::params {
   $web_server_protocol    = "http"
   $web_server_host        = "localhost"
   $web_server_http_port   = "80"
+  $axis_hosts_allowed     = ""
 
   $nexus_url              = undef
   $nexus_repository       = "komea"
