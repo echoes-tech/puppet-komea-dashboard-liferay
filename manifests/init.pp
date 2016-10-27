@@ -26,7 +26,8 @@ class komea_dashboard_liferay (
   $exporter_port          = $::komea_dashboard_liferay::params::exporter_port,
   $max_heap_size          = $::komea_dashboard_liferay::params::max_heap_size,
   $initial_heap_size      = $::komea_dashboard_liferay::params::initial_heap_size,
-  $spring_boot_admin_url  = $::komea_dashboard_liferay::params::spring_boot_admin_url
+  $spring_boot_admin_url  = $::komea_dashboard_liferay::params::spring_boot_admin_url,
+  $axis_hosts_allowed     = $::komea_dashboard_liferay::params::axis_hosts_allowed
 ) inherits komea_dashboard_liferay::params {
 
   anchor { "${module_name}::begin": } ->

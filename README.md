@@ -115,6 +115,10 @@ Specifies the name of the host that will be used to access Liferay on the client
 
 Specifies the port that will be used to access Liferay on the client-side. Valid options: integer. Default value: 80.
 
+##### `axis_hosts_allowed`
+
+Specifies the hosts that will have remote access to Liferay Axis API. Valid options: string. Default value: '' (no restriction).
+
 ##### `nexus_url`
 
 Specifies the url of the Nexus server that will be used to retrieve Komea Dashboard's artifacts. Valid options: string. Default value: _undef_.
