@@ -12,6 +12,15 @@ class komea_dashboard_liferay::service inherits komea_dashboard_liferay {
     status  => "/etc/init.d/dashboard-exporter status",
   }
 
+  #----------------- APPLICATION TV -------------------#
+
+  service { 'application-tv':
+    ensure => running,
+    start   => "/etc/init.d/application-tv start",
+    stop    => "/etc/init.d/application-tv stop",
+    status  => "/etc/init.d/application-tv status",
+  }
+
   service { 'liferay':
     ensure  => running,
     start   => "/etc/init.d/liferay start",

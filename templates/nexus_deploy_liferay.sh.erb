@@ -11,6 +11,7 @@ LIFERAY_VERSION="<%= @liferay_version %>"
 
 LIFERAY_GROUP_ID="<%= @nexus_liferay_group_id %>"
 KOMEA_GROUP_ID="<%= @nexus_komea_group_id %>"
+APP_TV_PATH="$KOMEA_LOCATION/application-tv"
 
 retrieveFromNexus() {
   OUTPUT=$1
@@ -59,6 +60,9 @@ fi
 
 # Deploy dashboard-exporter webapp
 retrieveFromNexus "$KOMEA_LOCATION/dashboard-exporter/dashboard-exporter.jar" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "dashboard-exporter" $VERSION "jar"
+
+# Deploy application-tv webapp
+retrieveFromNexus "$APP_TV_PATH/application-tv.jar" $NEXUS_REPOSITORY $KOMEA_GROUP_ID "application-tv" $VERSION "jar"
 
 # Deploy documentation
 DOC_ZIP="$KOMEA_LOCATION/documentation.zip"

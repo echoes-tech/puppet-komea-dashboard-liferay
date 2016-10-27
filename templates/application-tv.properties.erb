@@ -1,0 +1,17 @@
+server.port=8078
+server.context-path=/tv
+
+#--- Spring Admin ---#
+spring.boot.admin.url=<%= @spring_boot_admin_url %>
+#--- Spring Admin ---#
+
+#----------KOMEA------------------#
+komea.charts.url=<%= @dashboard_charts_url %>
+export.images.url=<%= @dashboard_exporter_url %>
+komea.login=<%= @komea_user %>
+komea.password=<%= @komea_password %>
+#---------------------------------#
+
+#------ Logging ------#
+logging.config=logback.xml
+#------ Logging ------#
