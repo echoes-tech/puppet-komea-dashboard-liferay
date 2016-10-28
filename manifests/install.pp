@@ -24,6 +24,8 @@ class komea_dashboard_liferay::install (
     mode    => '0755'
   }
 
+  $application_script = file("${module_name}/application.sh")
+
   #------------ DASHBOARD-EXPORTER ------------#
 
   $app_name = "dashboard-exporter"
