@@ -1,12 +1,12 @@
 {
-  "name": "echoes-komea_security",
-  "version": "4.1",
+  "name": "echoes-komea_dashboard_liferay",
+  "version": "0.4.1",
   "author": "Echoes Technologies",
   "summary": "Puppet module to manage Komea Dashboard Liferay's installation and configuration",
   "license": "Apache-2.0",
-  "source": "",
-  "project_page": "",
-  "issues_url": "",
+  "source": "https://github.com/echoes-tech/puppet-komea-dashboard-liferay",
+  "project_page": "https://github.com/echoes-tech/puppet-komea-dashboard-liferay",
+  "issues_url": "https://github.com/echoes-tech/puppet-komea-dashboard-liferay/issues",
   "tags": [
     "git"
   ],
