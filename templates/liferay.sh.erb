@@ -1,23 +1,49 @@
-#!/bin/bash
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          liferay
+# Required-Start:    $network $syslog
+# Required-Stop:     $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts and stops Liferay (Tomcat)
+# Description:       Starts and stops Liferay's Tomcat as if it was a
+#                    stardard Debian service: /etc/init.d/liferay start
+### END INIT INFO
 
+APPLICATION_NAME='liferay'
 LIFERAY_LOCATION="<%= @liferay_location %>"
+TOMCAT_HOME="$LIFERAY_LOCATION/tomcat"
+
+getpid() {
+    pid=`pgrep -f "java.*liferay"`
+}
 
 start() {
-  $LIFERAY_LOCATION/tomcat/bin/startup.sh
+    getpid
+    if [ -n "$pid" ]; then
+        echo "$APPLICATION_NAME (pid $pid) is already running"
+        exit 1
+    fi
+    
+    if [ -e $TOMCAT_HOME/catalina_pid.txt ]; then
+      rm -f $TOMCAT_HOME/catalina_pid.txt
+    fi
+
+    $TOMCAT_HOME/bin/startup.sh
 }
 
 stop() {
-  $LIFERAY_LOCATION/tomcat/bin/shutdown.sh
+    $TOMCAT_HOME/bin/shutdown.sh
 }
 
 status() {
-  if [ -e $LIFERAY_LOCATION/tomcat/catalina_pid.txt ]; then
-    liferayPID=`cat $LIFERAY_LOCATION/tomcat/catalina_pid.txt`
-    echo "Liferay (pid $liferayPID) is running..."
-  else
-    echo "Liferay is NOT running"
-    exit 1
-  fi
+    getpid
+    if [ -n "$pid" ]; then
+      echo "$APPLICATION_NAME (pid $pid) is running..."
+    else
+      echo "$APPLICATION_NAME is NOT running"
+      exit 1
+    fi
 }
 
 case "$1" in
